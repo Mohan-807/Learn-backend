@@ -2,6 +2,7 @@ import { Router } from "express";
 import asyncHandler from "../utils/asyncHandler.js";
 import songRoutes from "./song.routes.js";
 import AppError from "../utils/AppError.js";
+import authRoutes from "./auth.routes.js";
 
 const router = Router();
 
@@ -29,6 +30,8 @@ router.use(
   "/songs",
   songRoutes
 );
+
+router.use("/auth", authRoutes);
 
 router.get("/error-test",asyncHandler(async (req, res) => { throw new AppError("Test error"); }));
 

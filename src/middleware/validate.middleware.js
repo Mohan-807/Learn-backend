@@ -1,18 +1,24 @@
-// src/middleware/validate.middleware.js
-
-const validate = (schema) => {
+const validate = (
+  schema,
+  source = "body"
+) => {
   return (req, res, next) => {
-    const result = schema.safeParse(req.query);
+    const result =
+      schema.safeParse(
+        req[source]
+      );
 
     if (!result.success) {
       return res.status(400).json({
         success: false,
         message:
-          result.error.errors[0].message,
+          result.error.issues[0]
+            .message,
       });
     }
 
-    req.validatedData = result.data;
+    req.validatedData =
+      result.data;
 
     next();
   };

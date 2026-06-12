@@ -14,6 +14,8 @@ const router = Router();
  *   get:
  *     tags:
  *       - Songs
+ *     security:
+ *       - bearerAuth: []
  *     summary: Search songs
  *     parameters:
  *       - in: query
